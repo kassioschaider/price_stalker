@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table = 'table_product';
     public $timestamps = false;
     protected $fillable = ['barCode','name'];
+
+    public function analyses()
+    {
+        return $this->hasMany(Analyse::class);
+    }
 }
