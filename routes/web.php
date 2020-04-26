@@ -20,3 +20,7 @@ Route::get('/product', 'ProductController@index')->name('list_product');
 Route::get('/product/add', 'ProductController@create')->name('form_add_product');
 Route::post('/product/add', 'ProductController@store');
 Route::delete('/product/{id}', 'ProductController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
