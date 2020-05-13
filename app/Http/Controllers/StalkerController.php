@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 class StalkerController extends Controller
 {
-    public function index(Request $request) {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
         $client = new Client(['base_uri' => 'https://www.cliquefarma.com.br/preco/']);
         $product = '7891142145413';
         $resposta = $client->request('GET', $product);

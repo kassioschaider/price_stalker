@@ -8,6 +8,11 @@ use App\Product;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $products = Product::query()->orderBy('name')->get();
@@ -27,7 +32,7 @@ class ProductController extends Controller
         return redirect()->route('list_product');
     }
 
-    public function destroy (Request $request)
+    public function destroy(Request $request)
     {
         Product::destroy($request->id);
         $request->session()->flash('message', "Product successfully deleted!");
