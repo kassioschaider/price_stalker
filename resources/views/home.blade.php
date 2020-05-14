@@ -13,8 +13,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
+                    @if(Auth::user()->type == 'admin'))
+                        <a href="{{ route('list_price') }}" class="btn btn-dark mb-2">Prices</a>
+                    @endif
 
-                    You are logged in!
+                    <a href="{{ route('list_product') }}" class="btn btn-dark mb-2">Products</a>
+                    
                 </div>
             </div>
         </div>

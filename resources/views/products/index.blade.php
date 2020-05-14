@@ -18,12 +18,14 @@ Products
     @foreach ($products as $product)
     <li class="list-group-item d-flex justify-content-between align-items-center">
         {{ "{$product->barCode} - {$product->name}" }}
-        <form method="post" action="/product/{{ $product->id }}"
-            onsubmit="return confirm('Are you sure you want to remove {{ addslashes($product->name) }}?')">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
-        </form>
+        @can('destroy', $product)
+            <form method="post" action="/product/{{ $product->id }}"
+                onsubmit="return confirm('Are you sure you want to remove {{ addslashes($product->name) }}?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+            </form>
+        @endcan
     </li>
     @endforeach
 </ul>

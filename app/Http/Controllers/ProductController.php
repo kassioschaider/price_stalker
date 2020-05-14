@@ -15,9 +15,10 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $user = $request->user();
         $products = Product::query()->orderBy('name')->get();
         $message = $request->session()->get('message');
-        return view('products.index', compact('products', 'message'));
+        return view('products.index', compact('products', 'message', 'user'));
     }
 
     public function create()

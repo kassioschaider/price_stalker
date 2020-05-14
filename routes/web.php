@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/price', 'StalkerController@index');
+Route::get('/price', 'StalkerController@index')->name('list_price');
 Route::get('/product', 'ProductController@index')->name('list_product');
 Route::get('/product/add', 'ProductController@create')->name('form_add_product');
 Route::post('/product/add', 'ProductController@store');
