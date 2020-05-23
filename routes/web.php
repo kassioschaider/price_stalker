@@ -16,11 +16,14 @@ Route::get('/', function () {
 });
 
 Route::get('/price', 'StalkerController@index')->name('list_price');
+
 Route::get('/product', 'ProductController@index')->name('list_product');
 Route::get('/product/add', 'ProductController@create')->name('form_add_product');
 Route::post('/product/add', 'ProductController@store');
 Route::delete('/product/{id}', 'ProductController@destroy');
 
-Auth::routes();
+Route::get('/product/{productId}/analyse', 'AnalyseController@index')->name('list_analyse');
+Route::post('/product/{productId}/analyse/add', 'AnalyseController@store');
 
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

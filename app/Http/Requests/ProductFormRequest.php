@@ -29,7 +29,7 @@ class ProductFormRequest extends FormRequest
         ];
     }
 
-    public function messages ()
+    public function messages()
     {
         return [
             'barCode.size' => 'The Bar Code entered must be an EAN13.'

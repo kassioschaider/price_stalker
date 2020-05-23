@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use GuzzleHttp\Client;
-use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Http\Request;
+use Symfony\Component\DomCrawler\Crawler;
 
-class StalkerController extends Controller
+class AnalyseController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index(int $productId)
     {
         $client = new Client(['base_uri' => 'https://www.cliquefarma.com.br/preco/']);
-        $product = '7891142145413';
-        $resposta = $client->request('GET', $product);
+        $product = Product::find($productId);
+        $resposta = $client->request('GET', $product->barCode);
 
         $html = $resposta->getBody();
 
@@ -25,10 +26,6 @@ class StalkerController extends Controller
         $crawler->addHtmlContent($html);
 
         $prices = $crawler->filter('p.title-1.color-10.preco-oferta2.inline');
-        // $stores = $crawler->filter('figcaption.no-margin-bt.xs-size');
-
-        $priceStore[] = [];
-
-        return view('prices.index', compact('prices', 'product'));
+        return view('analyses.index', compact('prices', 'product'));
     }
 }

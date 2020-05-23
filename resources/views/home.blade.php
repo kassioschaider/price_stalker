@@ -8,13 +8,13 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if(session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
                     
-                    @if(Auth::user()->type == 'admin'))
+                    @if(Auth::user()->type == 'admin')
                         <a href="{{ route('list_price') }}" class="btn btn-dark mb-2">Prices</a>
                     @endif
 

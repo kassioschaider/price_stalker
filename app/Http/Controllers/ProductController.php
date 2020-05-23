@@ -28,7 +28,12 @@ class ProductController extends Controller
 
     public function store(ProductFormRequest $request)
     {
-        $product = Product::create($request->all());
+        $user = $request->user();
+        $product = Product::create([
+            'name' => $request->name,
+            'barCode' => $request->barCode,
+            'user_id' => $user->id
+        ]);
         $request->session()->flash('message', "Product {$product->id} successfully created: {$product->name}!");
         return redirect()->route('list_product');
     }
